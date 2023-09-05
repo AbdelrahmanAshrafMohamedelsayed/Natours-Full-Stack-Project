@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: "Lato", sans-serif;
+}
+
+::selection {
+  background-color: #55c57a;
+  color: #fff;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: #000;
+}
+html {
+  font-size: 62.5%;
+  font-family: "Lato", sans-serif;
+}
+@layer components {
+  .MMcontainer {
+    @apply px-[15px] mx-auto sm:w-[540px] md:w-[720px] lg:w-[960px] xl:w-[1140px] 2xl:w-[1320px];
+  }
+  .text-shadow {
+    text-shadow: 0 0.7rem 1rem black;
+  }
+  .box-shadow {
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1);
+  }
+  .background {
+    background: linear-gradient(to right bottom, #7dd56f, #28b487);
+  }
+  .btn-hover {
+    background-color: #f7f7f7;
+    color: #777;
+    text-shadow: none;
+    transform: translateY(-2px);
+  }
+  .linearGrad {
+    background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
+  }
+}
+@layer utilities {
+  .clip-path {
+    clip-path: polygon(0 0, 100% 0%, 100% 83%, 0% 98%);
+  }
+  .linearGrad {
+    background-image: linear-gradient(
+      to bottom right,
+      rgba(125, 213, 111, 0.85),
+      rgba(40, 180, 135, 0.85)
+    );
+  }
+  .heading-color {
+    background-clip: text;
+    background-image: linear-gradient(to right, #7dd56f, #28b487);
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  .box-dec {
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .clip-path2 {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 9vw), 0 100%);
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  /* width */
+  .scrolll::-webkit-scrollbar {
+    width: 3px;
+    height: 10px;
+  }
+
+  /* Track */
+  .scrolll::-webkit-scrollbar-track {
+    background: #f7f7f7;
+    border-radius: 3px;
+    margin: 3px;
+  }
+
+  /* Handle */
+  .scrolll::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+  }
+  .errorInput {
+    background-color: rgba(11, 10, 10, 0.06);
+    border-bottom: 3px solid red;
+  }
+  /* Handle on hover */
+  .scrolll::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  .err {
+    padding: 1rem;
+    color: red;
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin: 0;
+  }
+}

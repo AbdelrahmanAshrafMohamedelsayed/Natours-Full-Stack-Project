@@ -1,0 +1,2 @@
+echo "config.txt" >>.gitignore
+config.txt
