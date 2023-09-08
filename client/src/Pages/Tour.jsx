@@ -11,6 +11,8 @@ import { ImagesList, TourBook } from "../components";
 import reviews from "./../Features/reviews";
 import useAxios from "../hooks/useAxios";
 import ExtractYear from "../util/DateExtract";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 const Tour = () => {
   const listItems = useMemo(() => [tourimage1, tourimage2, tourimage3], []);
   const { id } = useParams();
@@ -37,20 +39,26 @@ const Tour = () => {
     <>
       <div className="relative">
         <div className=" relative w-full h-[calc(62vw)] bg-black clip-path2 min-h-[50vh] max-h-[calc(100vh-8rem)] before:absolute before:content-[''] before:top-0 before:left-0 before:w-full before:h-full  z-10  before:linearGrad before:opacity-70">
-          <img
-            src={
-              new URL(`../assets/tours/${tour?.imageCover}`, import.meta.url)
-                .href
-            }
-            alt={tour?.name}
-            className="w-full h-full object-cover "
-          />
+          {tour?.imageCover && (
+            <img
+              src={
+                new URL(`../assets/tours/${tour?.imageCover}`, import.meta.url)
+                  .href
+              }
+              alt={tour?.name}
+              className="w-full h-full object-cover "
+            />
+          )}
+          {!tour?.imageCover && <Skeleton width={"100%"} height={"100%"} />}
         </div>
         <div className="absolute top-[35%] left-[50%] transform translate-x-[-50%] -translate-y-[50%] z-20 text-center mx-auto ">
           <h1 className=" capitalize  text-[5rem] font-[300]  z-20 w-[70%] mx-auto max-md:text-[4rem] max-sm:text-[2.5rem] ">
-            <span className="py-[1rem] px-[2rem] linearGrad text-[#f7f7f7] box-dec">
-              {tour?.name}
-            </span>
+            {tour?.name && (
+              <span className="py-[1rem] px-[2rem] linearGrad text-[#f7f7f7] box-dec">
+                {tour?.name}
+              </span>
+            )}
+            {!tour?.name && <Skeleton />}
           </h1>
           <div className=" flex items-center gap-[4rem] justify-center mt-8 mx-auto max-md:gap-[3rem] ">
             <div className="flex items-center gap-[.8rem] max-md:gap-[.6rem] ">
@@ -58,7 +66,11 @@ const Tour = () => {
                 <AiOutlineClockCircle />
               </span>
               <span className="text-[1.5rem] text-[#f7f7f7] font-[700] uppercase text-shadow max-md:text-[1rem]">
-                {tour?.duration} DAYS
+                {tour?.duration ? (
+                  tour?.duration + " Days"
+                ) : (
+                  <Skeleton width={50} />
+                )}
               </span>
             </div>
             <div className="flex items-center gap-[.8rem] max-md:gap-[.6rem] ">
@@ -66,7 +78,11 @@ const Tour = () => {
                 <CiLocationOn />
               </span>
               <span className="text-[1.5rem] text-[#f7f7f7] font-[700] uppercase text-shadow max-md:text-[1rem]">
-                {tour?.startLocation?.description}
+                {tour?.startLocation?.description ? (
+                  tour?.startLocation?.description
+                ) : (
+                  <Skeleton width={60} />
+                )}
               </span>
             </div>
           </div>

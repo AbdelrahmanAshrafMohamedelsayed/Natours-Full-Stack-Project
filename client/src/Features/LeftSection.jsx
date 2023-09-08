@@ -2,7 +2,8 @@ import React from "react";
 import { MdDateRange } from "react-icons/md";
 import { FactComponent, TourUserElement } from "../components";
 import userImage from "../assets/users/user-1.jpg";
-
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 const LeftSection = (props) => {
   // clg(props);
   // console.log(props.guide + "jjjjjjjjjjjjj");
@@ -32,7 +33,7 @@ const LeftSection = (props) => {
           <FactComponent
             icon="trending"
             first="Rating"
-            second={`${props?.RATING} / 5`}
+            second={`${+props?.RATING} / 5`}
           />
         </div>
       </div>

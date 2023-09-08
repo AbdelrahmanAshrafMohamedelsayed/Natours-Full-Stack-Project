@@ -3,7 +3,9 @@ import { TourCard } from "../components";
 import useAxios from "./../hooks/useAxios";
 import axios from "axios";
 import { json, useLoaderData } from "react-router-dom";
-
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import SkeltonCard from "../components/skeltonCard";
 const HomePage = () => {
   const [tours, setTours] = useState([]);
   const { response, isLoading, error, sendRequest: fetchTours } = useAxios();
@@ -24,13 +26,13 @@ const HomePage = () => {
   // console.log("response");
   return (
     <main className="px-[3rem] py-[2rem] md:px-[6rem] md:py-[4rem] 2xl:px-[8rem] 2xl:py-[6rem] bg-[#F7F7F7]">
-      {isLoading && <h1>Loading...</h1>}
       <div className="flex items-center  justify-center flex-wrap mx-auto md:justify-between ">
         {response &&
           tours.length > 0 &&
           !isLoading &&
           !error &&
           tours.map((tour) => <TourCard key={tour.id} tour={tour} />)}
+        {isLoading && <SkeltonCard cards={8} />}
       </div>
     </main>
   );

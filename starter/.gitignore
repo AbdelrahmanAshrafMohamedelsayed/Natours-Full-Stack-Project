@@ -8,8 +8,19 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-.eslintrc.cjs
-node_modules
 
+node_modules
+dist
+dist-ssr
 *.local
-.eslintignore
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

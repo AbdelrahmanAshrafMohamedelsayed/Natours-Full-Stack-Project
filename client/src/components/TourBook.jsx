@@ -36,7 +36,7 @@ const TourBook = () => {
           </div>
           <div className="transform hover:translate-y-[-4px]  duration-[.5s] min-w-fit">
             <Link
-              to={"tour/3"}
+              to={"/login"}
               className="  hover:shadow-lg  py-[1.5rem] px-[3rem] bg-[#55c57a] text-[#f7f7f7] rounded-[10rem] text-[1.5rem] font-[400] uppercase "
             >
               Log in to book a tour!

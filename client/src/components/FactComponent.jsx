@@ -2,7 +2,8 @@ import React from "react";
 import { MdDateRange } from "react-icons/md";
 import { BiTrendingUp } from "react-icons/bi";
 import { AiOutlineStar, AiOutlineUser } from "react-icons/ai";
-
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 const FactComponent = ({ icon, first, second }) => {
   return (
     <div className="flex items-center gap-[2.25rem] mb-[2.25rem] text-[1.4rem] font-[700] ">
@@ -13,9 +14,11 @@ const FactComponent = ({ icon, first, second }) => {
           {icon === "user" && <AiOutlineUser />}
           {icon === "trending" && <BiTrendingUp />}
         </span>
-        <span className="text-[#777] font-[700] uppercase">{first}</span>
+        <span className="text-[#777] font-[700] uppercase">
+          {first || <Skeleton />}
+        </span>
       </div>
-      <span className="text-[#777] font-[300]">{second}</span>
+      <span className="text-[#777] font-[300]">{second || <Skeleton />}</span>
     </div>
   );
 };
