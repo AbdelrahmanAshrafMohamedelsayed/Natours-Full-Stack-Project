@@ -21,6 +21,13 @@ const Login = () => {
     navigate("/");
   };
   const { response, isLoading, error, sendRequest: LoginRequest } = useAxios();
+  useEffect(() => {
+    if (error) {
+      const err = error;
+      console.log(err);
+      toast.error(err);
+    }
+  }, [error]);
   const submitHandler = (values, formik) => {
     // reset form
     // console.log(values);

@@ -3,8 +3,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 const useAxios = () => {
-  axios.defaults.baseURL =
-    "https://react-http-6d127-default-rtdb.firebaseio.com";
   const [isLoading, setIsLoading] = useState(false);
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);

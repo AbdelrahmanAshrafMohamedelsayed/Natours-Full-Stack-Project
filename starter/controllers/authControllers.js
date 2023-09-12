@@ -39,6 +39,7 @@ const createSendToken = (user, statusCode, res) => {
 };
 exports.signup = catchAsync(async (req, res, next) => {
   // const user = await User.create(req.body); // create a new document in the collection 'User' // it's good but not secure
+
   const user = await User.create({
     name: req.body.name,
     email: req.body.email,
@@ -65,6 +66,7 @@ exports.signup = catchAsync(async (req, res, next) => {
 });
 
 exports.login = catchAsync(async (req, res, next) => {
+  // console.log('🔥🔥🔥🔥🔥🔥🔥🔥🔥');
   const { email, password } = req.body; // get the email and password from the request body
   // 1) Check if email and password exist
   if (!email || !password) {
@@ -73,6 +75,8 @@ exports.login = catchAsync(async (req, res, next) => {
   // 2) Check if user exists && password is correct
   // we need to select the password because it is not selected by default , + means select
   const user = await User.findOne({ email }).select('+password'); // get the user from the database
+  // console.log('🔥🔥🔥🔥🔥🔥🔥🔥🔥');
+  // console.log('🔥🔥🔥🔥🔥🔥🔥🔥🔥');
   // console.log(user);
   // 3) If everything ok, send token to client
   // const correct = await user.correctPassword(password, user.password); // compare the password from the request body with the password from the database
@@ -81,9 +85,11 @@ exports.login = catchAsync(async (req, res, next) => {
   //   return next(new ErrorHandling('Incorrect email or password', 401)); // 401 means unauthorized
   // }
   if (!user || !(await user.correctPassword(password, user.password))) {
-    console.log(password, user.password);
+    console.log(password, user?.password);
+    console.log('🔥🔥🔥🔥🔥🔥🔥🔥🔥');
     return next(new ErrorHandling('Incorrect email or password', 401)); // 401 means unauthorized
   }
+  console.log('🔥🔥🔥🔥🔥🔥🔥🔥🔥');
   // console.log(user);
   // const token = signToken(user._id);
 

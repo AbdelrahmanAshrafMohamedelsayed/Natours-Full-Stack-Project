@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import SignupValidate from "../Validations/SignupValidate";
@@ -12,6 +12,13 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { response, isLoading, error, sendRequest: SignUpRequest } = useAxios();
+  useEffect(() => {
+    if (error) {
+      const err = error;
+      console.log(err);
+      toast.error(err);
+    }
+  }, [error]);
   const Applydata = (data) => {
     const token = data?.data?.token;
     const user = data?.data?.data?.user;
@@ -20,7 +27,7 @@ const SignUp = () => {
     dispatch(userActions.Setuser(user));
     dispatch(userActions.setToken(token));
     toast.success("SignUp Successfully");
-    // navigate("/");
+    navigate("/");
     console.log(data);
   };
   if (error) {
