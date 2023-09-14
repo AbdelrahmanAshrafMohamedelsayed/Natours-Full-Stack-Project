@@ -33,6 +33,9 @@ const HomePage = () => {
           !error &&
           tours.map((tour) => <TourCard key={tour.id} tour={tour} />)}
         {isLoading && <SkeltonCard cards={8} />}
+        {response && tours.length === 0 && !isLoading && !error && (
+          <h1 className="text-3xl font-bold text-center">No Tours Available</h1>
+        )}
       </div>
     </main>
   );

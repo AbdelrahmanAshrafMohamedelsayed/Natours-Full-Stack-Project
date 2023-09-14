@@ -41,12 +41,14 @@ const Tour = () => {
         <div className=" relative w-full h-[calc(62vw)] bg-black clip-path2 min-h-[50vh] max-h-[calc(100vh-8rem)] before:absolute before:content-[''] before:top-0 before:left-0 before:w-full before:h-full  z-10  before:linearGrad before:opacity-70">
           {tour?.imageCover && (
             <img
-              src={
-                new URL(`../assets/tours/${tour?.imageCover}`, import.meta.url)
-                  .href
-              }
+              // src={
+              //   new URL(`../assets/tours/${tour?.imageCover}`, import.meta.url)
+              //     .href
+              // }
+              crossOrigin="anonymous"
+              src={`http://localhost:3000/img/tours/${tour?.imageCover}`}
               alt={tour?.name}
-              className="w-full h-full object-cover "
+              className="w-full h-full object-cover"
             />
           )}
           {!tour?.imageCover && <Skeleton width={"100%"} height={"100%"} />}
