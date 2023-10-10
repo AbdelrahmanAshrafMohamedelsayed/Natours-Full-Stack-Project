@@ -4,7 +4,38 @@ import tourimage1 from "../assets/tours/tour-5-1.jpg";
 import tourimage2 from "../assets/tours/tour-5-2.jpg";
 import tourimage3 from "../assets/tours/tour-5-3.jpg";
 import { Link } from "react-router-dom";
-const TourBook = () => {
+import { useDispatch, useSelector } from "react-redux";
+import { useCheckout } from "../hooks/useUserData";
+import { toast } from "react-toastify";
+import { loadStripe } from "@stripe/stripe-js";
+
+// Replace 'YOUR_PUBLISHABLE_KEY' with your actual Stripe publishable key
+const stripePromise = loadStripe(
+  "pk_test_51NrLVFDyCzXIx5p1wBWKXTbLnPd28soglcZfAreoMwDTjNK4tJ2ifevGFNESpIdSreKvZjgosM4Q6kbUex8YduIB0044dXXOzs"
+);
+const TourBook = ({ tourId }) => {
+  const onSuccess = async (session) => {
+    console.log("successssss");
+    console.log(session);
+    const stripe = await stripePromise;
+    const { error } = await stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+  };
+  const onError = (data) => {
+    // console.log("errdddddddddddddddddddddrrr");
+    toast.error(data.response.data.message || "Something went wrong!");
+  };
+  const {
+    isLoading,
+    data: session,
+    isError,
+    error,
+    refetch,
+  } = useCheckout(tourId, onSuccess, onError);
+  // const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.user);
+  const bookTourHandler = () => {};
   return (
     <div className="bg-[#F7F7F7] mt-[-9vw]  pt-[calc(15rem+9vw)] pb-[11rem] flex justify-center overflow-hidden ">
       <div className="max-w-[105rem] bg-white rounded-[2rem] py-[9rem] pr-[3rem] pl-[21rem] max-md:pl-[3rem] shadow-xl overflow-hidden relative max-md:max-w-[90%] ">
@@ -35,12 +66,22 @@ const TourBook = () => {
             </p>
           </div>
           <div className="transform hover:translate-y-[-4px]  duration-[.5s] min-w-fit">
-            <Link
-              to={"/login"}
-              className="  hover:shadow-lg  py-[1.5rem] px-[3rem] bg-[#55c57a] text-[#f7f7f7] rounded-[10rem] text-[1.5rem] font-[400] uppercase "
-            >
-              Log in to book a tour!
-            </Link>
+            {!token && (
+              <Link
+                to={"/login"}
+                className="  hover:shadow-lg  py-[1.5rem] px-[3rem] bg-[#55c57a] text-[#f7f7f7] rounded-[10rem] text-[1.5rem] font-[400] uppercase "
+              >
+                Log in to book a tour!
+              </Link>
+            )}
+            {token && (
+              <button
+                onClick={refetch}
+                className="  hover:shadow-lg  py-[1.5rem] px-[3rem] bg-[#55c57a] text-[#f7f7f7] rounded-[10rem] text-[1.5rem] font-[400] uppercase "
+              >
+                {isLoading ? "sending..." : "Book tour now!"}
+              </button>
+            )}
           </div>
         </div>
       </div>

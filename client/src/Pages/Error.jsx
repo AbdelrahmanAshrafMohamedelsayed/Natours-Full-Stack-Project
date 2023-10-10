@@ -4,8 +4,8 @@ import { Link, useRouteError } from "react-router-dom";
 const Error = () => {
   let error = "THE PAGE CAN'T BE FOUND";
   const errorroute = useRouteError();
-  if (errorroute.status === 500) {
-    error = errorroute.data.message;
+  if (errorroute?.status === 500) {
+    error = errorroute?.data?.message;
   }
   return (
     <div className="errorPage">

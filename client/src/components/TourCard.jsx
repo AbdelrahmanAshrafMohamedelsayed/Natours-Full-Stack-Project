@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import ExtractYear from "../util/DateExtract";
 const TourCard = ({ tour }) => {
   const { year, month } = ExtractYear(tour?.startDates[0]);
-  console.log(tour);
+  // console.log(tour);
   return (
     <div className="basis-[90%] md:basis-[48%] lg:basis-[30%] xl:basis-[27%] max-w-[120rem] box-shadow rounded-[3px] mb-[2rem] ">
       {/* first section */}
@@ -76,7 +76,7 @@ const TourCard = ({ tour }) => {
         </div>
         <div className="transform hover:translate-y-[-4px]  duration-[.5s]">
           <Link
-            to={`tour/${tour?.id}`}
+            to={`/tour/${tour?.id}`}
             className="  hover:shadow-lg  py-[1.5rem] px-[3rem] bg-[#55c57a] text-[#f7f7f7] rounded-[10rem] text-[1.5rem] font-[400] uppercase "
           >
             Details

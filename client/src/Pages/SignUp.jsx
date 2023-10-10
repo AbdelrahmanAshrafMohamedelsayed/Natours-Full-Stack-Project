@@ -7,19 +7,13 @@ import useAxios from "../hooks/useAxios";
 import { userActions } from "../Store/user";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { useSignUpUser } from "../hooks/useUserData";
 // import immg from "../../../starter/public/img/users/user-5c8a1d5b0190b214360dc057-1693580599164.jpeg";
 const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { response, isLoading, error, sendRequest: SignUpRequest } = useAxios();
-  useEffect(() => {
-    if (error) {
-      const err = error;
-      console.log(err);
-      toast.error(err);
-    }
-  }, [error]);
-  const Applydata = (data) => {
+  const onSuccess = (data) => {
+    console.log("successssss");
     const token = data?.data?.token;
     const user = data?.data?.data?.user;
     localStorage.setItem("token", token);
@@ -30,9 +24,36 @@ const SignUp = () => {
     navigate("/");
     console.log(data);
   };
-  if (error) {
-    console.log(error);
-  }
+  const onError = (data) => {
+    // console.log("errdddddddddddddddddddddrrr");
+    toast.error(data.response.data.message || "Something went wrong!");
+  };
+  const { mutate, isLoading, isError, error, isSuccess } = useSignUpUser(
+    onSuccess,
+    onError
+  );
+  // const { response, isLoading, error, sendRequest: SignUpRequest } = useAxios();
+  // useEffect(() => {
+  //   if (error) {
+  //     const err = error;
+  //     console.log(err);
+  //     toast.error(err);
+  //   }
+  // }, [error]);
+  // const Applydata = (data) => {
+  //   const token = data?.data?.token;
+  //   const user = data?.data?.data?.user;
+  //   localStorage.setItem("token", token);
+  //   localStorage.setItem("user", JSON.stringify(user));
+  //   dispatch(userActions.Setuser(user));
+  //   dispatch(userActions.setToken(token));
+  //   toast.success("SignUp Successfully");
+  //   navigate("/");
+  //   console.log(data);
+  // };
+  // if (error) {
+  //   console.log(error);
+  // }
   const submitHandler = (values, formik) => {
     // reset form
     // formik.resetForm();
@@ -45,17 +66,18 @@ const SignUp = () => {
       password,
       passwordConfirm: confirmPassword,
     };
-    SignUpRequest(
-      {
-        url: "http://127.0.0.1:3000/api/v1/users/signup",
-        method: "POST",
-        data: obj,
-        headers: {
-          accept: "application/json",
-        },
-      },
-      Applydata
-    );
+    // SignUpRequest(
+    //   {
+    //     url: "http://127.0.0.1:3000/api/v1/users/signup",
+    //     method: "POST",
+    //     data: obj,
+    //     headers: {
+    //       accept: "application/json",
+    //     },
+    //   },
+    //   Applydata
+    // );
+    mutate(obj);
   };
   const validate = SignupValidate;
   //   console.log(validate);

@@ -151,6 +151,7 @@ html {
   .scrolll::-webkit-scrollbar {
     width: 3px;
     height: 10px;
+    display: none;
   }
 
   /* Track */
@@ -158,6 +159,7 @@ html {
     background: #f7f7f7;
     border-radius: 3px;
     margin: 3px;
+    display: none;
   }
 
   /* Handle */
@@ -168,6 +170,7 @@ html {
     -moz-border-radius: 3px;
     -ms-border-radius: 3px;
     -o-border-radius: 3px;
+    display: none;
   }
   .errorInput {
     background-color: rgba(11, 10, 10, 0.06);

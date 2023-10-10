@@ -13,28 +13,29 @@ import useAxios from "../hooks/useAxios";
 import ExtractYear from "../util/DateExtract";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useOneTourFetch } from "../hooks/useToursData";
 const Tour = () => {
   const listItems = useMemo(() => [tourimage1, tourimage2, tourimage3], []);
   const { id } = useParams();
-  const [tour, setTour] = useState(null);
+  const { isLoading, data: tour, isError, error } = useOneTourFetch(id);
+  // console.log({ isLoading, tour, isError, error });
   const { year, month } = ExtractYear(tour?.startDates[0]);
+  // const { response, isLoading, error, sendRequest: fetchTour } = useAxios();
 
-  const { response, isLoading, error, sendRequest: fetchTour } = useAxios();
-
-  useEffect(() => {
-    const Applydata = (data) => {
-      // console.log(data.data.data.data);
-      setTour(data.data.data.data);
-    };
-    fetchTour(
-      {
-        url: `http://127.0.0.1:3000/api/v1/tours/${id}`,
-        method: "GET",
-      },
-      Applydata
-    );
-  }, [fetchTour]);
-  console.log(tour);
+  // useEffect(() => {
+  //   const Applydata = (data) => {
+  //     // console.log(data.data.data.data);
+  //     setTour(data.data.data.data);
+  //   };
+  //   fetchTour(
+  //     {
+  //       url: `http://127.0.0.1:3000/api/v1/tours/${id}`,
+  //       method: "GET",
+  //     },
+  //     Applydata
+  //   );
+  // }, [fetchTour]);
+  // console.log(tour);
   return (
     <>
       <div className="relative">
@@ -103,8 +104,8 @@ const Tour = () => {
       </div>
       <ImagesList list={tour?.images} />
       <Map2 startLocation={tour?.startLocation} locations={tour?.locations} />
-      <Reviews list={tour?.reviews} />
-      <TourBook />
+      <Reviews list={tour?.reviews} tourId={id} />
+      <TourBook tourId={id} />
     </>
   );
 };

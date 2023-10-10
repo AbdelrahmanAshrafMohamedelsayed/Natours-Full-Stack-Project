@@ -13,6 +13,7 @@ import PasswordChangeForm from "./PasswordChangeForm";
 import ProfileNav from "./ProfileNav";
 import ProfileBigForm from "./ProfileBigForm";
 import ProfileNavItem from "./ProfileNavItem";
+import AddReview from "./AddReview";
 export {
   NavBar,
   TourCard,
@@ -29,4 +30,5 @@ export {
   ProfileNav,
   ProfileBigForm,
   ProfileNavItem,
+  AddReview,
 };

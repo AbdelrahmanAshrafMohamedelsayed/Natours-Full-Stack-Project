@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { userActions } from "../Store/user";
 const RootLayout = () => {
   const dispatch = useDispatch();
-  console.log("RootLayout");
+  // console.log("RootLayout");
   useEffect(() => {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
@@ -14,7 +14,7 @@ const RootLayout = () => {
     if (token && user) {
       dispatch(userActions.Setuser(JSON.parse(user)));
       dispatch(userActions.setToken(token));
-      console.log("RootLayout", token, user);
+      // console.log("RootLayout", token, user);
     }
   }, []);
   // const data = useLoaderData();

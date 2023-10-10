@@ -7,15 +7,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
+import { useProfileUpdate } from "../hooks/useUserData";
 const AccountUpdateForm = () => {
-  const [img, setimg] = useState(null);
-  // console.log(img);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { token } = useSelector((state) => state.user);
-  const { user: userData } = useSelector((state) => state.user);
-  console.log(userData.name + "jjjj");
-  const Applydata = (data) => {
+  const onSuccess = (data) => {
+    console.log("successssss");
     // const token = data?.data?.token;
     const user = data?.data?.data?.user;
     // localStorage.setItem("token", token);
@@ -25,31 +22,57 @@ const AccountUpdateForm = () => {
     // console.log(data);
     toast.success("Profile Updated Successfully");
   };
-  const { response, isLoading, error, sendRequest: AccountUpdate } = useAxios();
-  useEffect(() => {
-    if (error) {
-      const err = error.split(":")[2];
-      toast.error(err);
-    }
-  }, [error]);
+  const onError = (data) => {
+    // console.log("errdddddddddddddddddddddrrr");
+    toast.error(
+      data.response.data.message.split(":")[2] || "Something went wrong!"
+    );
+  };
+  const { mutate, isLoading, isError, error, isSuccess } = useProfileUpdate(
+    onSuccess,
+    onError
+  );
+  const [img, setimg] = useState(null);
+  // console.log(img);
+  const { token } = useSelector((state) => state.user);
+  const { user: userData } = useSelector((state) => state.user);
+  // console.log(userData.name + "jjjj");
+  // const Applydata = (data) => {
+  //   // const token = data?.data?.token;
+  //   const user = data?.data?.data?.user;
+  //   // localStorage.setItem("token", token);
+  //   localStorage.setItem("user", JSON.stringify(user));
+  //   dispatch(userActions.Setuser(user));
+  //   // dispatch(userActions.setToken(token));
+  //   // console.log(data);
+  //   toast.success("Profile Updated Successfully");
+  // };
+  // const { response, isLoading, error, sendRequest: AccountUpdate } = useAxios();
+  // useEffect(() => {
+  //   if (error) {
+  //     const err = error.split(":")[2];
+  //     toast.error(err);
+  //   }
+  // }, [error]);
   const [previewImage, setPreviewImage] = useState(null);
   const submitHandler = (values, formik) => {
     // reset form
     // formik.resetForm();
     // console.log("formik");
     // console.log(values);
-    AccountUpdate(
-      {
-        url: "http://127.0.0.1:3000/api/v1/users/updateMe",
-        method: "PATCH",
-        data: { ...values, photo: img },
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: "Bearer " + token,
-        },
-      },
-      Applydata
-    );
+    // AccountUpdate(
+    //   {
+    //     url: "http://127.0.0.1:3000/api/v1/users/updateMe",
+    //     method: "PATCH",
+    //     data: { ...values, photo: img },
+    //     headers: {
+    //       "Content-Type": "multipart/form-data",
+    //       Authorization: "Bearer " + token,
+    //     },
+    //   },
+    //   Applydata
+    // );
+    mutate({ ...values, photo: img });
   };
   const validate = UserUpdateValidate;
   if (userData.name && userData.email) {

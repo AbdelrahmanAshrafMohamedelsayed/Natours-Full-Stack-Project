@@ -12,25 +12,27 @@ const NavBar = () => {
   const logoutHandler = (e) => {
     e.preventDefault();
     // await signOut(auth);
-    console.log("logout1");
+    // console.log("logout1");
     // submit(null, { action: "/logout", method: "post" });
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     dispatch(userActions.Removedata());
 
-    console.log("hhhhhhhhhhhhhhhhhhhhh");
-    console.log("logout");
+    // console.log("hhhhhhhhhhhhhhhhhhhhh");
+    // console.log("logout");
     navigate("/");
   };
   const [Showlist, setShowlist] = useState(false);
   const user = useSelector((state) => state.user)?.user;
   useEffect(() => {
-    console.log("hjjjjjjjjjjjjjjjjjjg");
+    // console.log("hjjjjjjjjjjjjjjjjjjg");
   }, [user]);
-  console.log(user + ";;;;;;;;;;;;;;;;;;;;");
+  // console.log(user + ";;;;;;;;;;;;;;;;;;;;");
   const { token } = useSelector((state) => state.user);
-  const { name, photo } = user;
-  console.log("jkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk", photo);
+  // const { name, photo } = user;
+  const name = user?.name;
+  const photo = user?.photo;
+  // console.log("jkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk", photo);
   return (
     <header className=" bg-nav text-preW relative z-[1000]">
       <nav className="h-[8rem] px-[5rem] flex justify-between items-center relative max-md:px-[2.5rem]">

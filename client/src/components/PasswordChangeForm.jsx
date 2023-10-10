@@ -2,12 +2,44 @@ import React from "react";
 import { Formik, Form } from "formik";
 import { TextField } from "../components";
 import ChangePassValidate from "../Validations/ChangePass";
+import { toast } from "react-toastify";
+import { useProfilePasswordUpdate } from "../hooks/useUserData";
+import { useDispatch } from "react-redux";
+import { userActions } from "../Store/user";
 const PasswordChangeForm = () => {
+  const dispatch = useDispatch();
+  const onSuccess = (data) => {
+    // console.log(data);
+    // console.log("successssss");
+    const token = data?.data?.token;
+    const user = data?.data?.data?.user;
+    console.log({ user, token });
+    localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(user));
+    dispatch(userActions.setToken(token));
+    dispatch(userActions.Setuser(user));
+    toast.success("Password Updated Successfully");
+  };
+  const onError = (data) => {
+    console.log("errdddddddddddddddddddddrrr");
+
+    toast.error(data.response.data.message || "Something went wrong!");
+  };
+  const { mutate, isLoading, isError, error, isSuccess } =
+    useProfilePasswordUpdate(onSuccess, onError);
   const submitHandler = (values, formik) => {
     // reset form
-    formik.resetForm();
     console.log("formik");
     console.log(values);
+    const { Currentpassword, password, confirmPassword } = values;
+    const data = {
+      currentPassword: Currentpassword,
+      password,
+      passwordConfirm: confirmPassword,
+    };
+    mutate(data);
+
+    // formik.resetForm();
   };
   const validate = ChangePassValidate;
   return (
