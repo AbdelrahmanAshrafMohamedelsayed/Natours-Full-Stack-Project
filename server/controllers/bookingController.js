@@ -13,8 +13,8 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   const session = await stripe.checkout.sessions.create({
     mode: 'payment', // Specify the payment mode
     payment_method_types: ['card'], // card is the only way to pay as it's the only one supported by stripe free account
-    success_url: `http://localhost:5173/?tour=${req.params.tourId}&user=${req.user.id}&price=${tour.price}`, // this is the url that the user will be redirected to after successful payment
-    cancel_url: `http://localhost:5173/tour/${req.params.tourId}`, // this is the url that the user will be redirected to after failed payment
+    success_url: `${process.env.FRONTEND_URL}/?tour=${req.params.tourId}&user=${req.user.id}&price=${tour.price}`, // this is the url that the user will be redirected to after successful payment
+    cancel_url: `${process.env.FRONTEND_URL}/tour/${req.params.tourId}`, // this is the url that the user will be redirected to after failed payment
     customer_email: req.user.email, // this is the email of the user that will be used to send the email to
     client_reference_id: req.params.tourId, // this is the id of the tour that will be used to create the booking
     // line_items: [

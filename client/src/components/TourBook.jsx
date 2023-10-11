@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useCheckout } from "../hooks/useUserData";
 import { toast } from "react-toastify";
 import { loadStripe } from "@stripe/stripe-js";
+import { useFetchBookingTours } from "../hooks/useToursData";
 
 // Replace 'YOUR_PUBLISHABLE_KEY' with your actual Stripe publishable key
 const stripePromise = loadStripe(
@@ -35,7 +36,25 @@ const TourBook = ({ tourId }) => {
   } = useCheckout(tourId, onSuccess, onError);
   // const dispatch = useDispatch();
   const { token } = useSelector((state) => state.user);
-  const bookTourHandler = () => {};
+  const user = useSelector((state) => state.user)?.user;
+  console.log(user);
+  const onSuccess2 = (data) => {
+    console.log("successssss");
+    console.log(data);
+  };
+  const onError2 = (data) => {
+    console.log("errdddddddddddddddddddddrrr");
+    toast.error(data.response.data.message || "Something went wrong!");
+  };
+  const {
+    isLoading2,
+    isError2,
+    error2,
+    data: userBookedTours,
+  } = useFetchBookingTours(onSuccess2, onError2);
+  const isBooked = userBookedTours?.some((item) => item.id === tourId);
+  // userBookedTours?.map((item) => console.log(item.id === tourId));
+  console.log({ isBooked });
   return (
     <div className="bg-[#F7F7F7] mt-[-9vw]  pt-[calc(15rem+9vw)] pb-[11rem] flex justify-center overflow-hidden ">
       <div className="max-w-[105rem] bg-white rounded-[2rem] py-[9rem] pr-[3rem] pl-[21rem] max-md:pl-[3rem] shadow-xl overflow-hidden relative max-md:max-w-[90%] ">
@@ -74,12 +93,14 @@ const TourBook = ({ tourId }) => {
                 Log in to book a tour!
               </Link>
             )}
-            {token && (
+            {token && user.role === "user" && (
               <button
                 onClick={refetch}
-                className="  hover:shadow-lg  py-[1.5rem] px-[3rem] bg-[#55c57a] text-[#f7f7f7] rounded-[10rem] text-[1.5rem] font-[400] uppercase "
+                className="  hover:shadow-lg  py-[1.5rem] px-[3rem] bg-[#55c57a] text-[#f7f7f7] rounded-[10rem] text-[1.5rem] font-[400] uppercase disabled:opacity-50 disabled:cursor-not-allowed "
+                disabled={isBooked}
               >
-                {isLoading ? "sending..." : "Book tour now!"}
+                {!isBooked && (isLoading ? "sending..." : "Book tour now!")}
+                {isBooked && "You already booked this tour!"}
               </button>
             )}
           </div>

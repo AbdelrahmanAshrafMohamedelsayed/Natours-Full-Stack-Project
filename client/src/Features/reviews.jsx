@@ -27,7 +27,9 @@ const reviews = ({ list, tourId }) => {
           <Rev key={item?.id} item={item} />
         ))}
       </div>
-      {<AddReview tourId={tourId} hasReview={hasReview} reviewSm={reviewSm} />}
+      {user.role === "user" && (
+        <AddReview tourId={tourId} hasReview={hasReview} reviewSm={reviewSm} />
+      )}
     </div>
   );
 };

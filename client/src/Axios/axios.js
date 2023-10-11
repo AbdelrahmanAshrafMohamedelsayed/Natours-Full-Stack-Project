@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const client = axios.create({ baseURL: "http://127.0.0.1:3000/api/v1" });
+const client = axios.create({
+  baseURL: import.meta.env.VITE_NATOURS_API_BACKEND_URL,
+});
 
 export const request = ({ ...options }) => {
   const token = localStorage.getItem("token");

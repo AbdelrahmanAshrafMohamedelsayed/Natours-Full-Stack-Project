@@ -57,7 +57,7 @@ exports.signup = catchAsync(async (req, res, next) => {
   // });
 
   // send the welcome email
-  const url = `http://localhost:5173/me`;
+  const url = `${process.env.FRONTEND_URL}/me`;
   // console.log(url);
   await new Email(user, url).sendWelcome();
   // send the welcome email
@@ -189,7 +189,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     //   subject: 'Your password reset token (valid for 10 min)',
     //   message
     // });
-    const resetURL = `http://localhost:5173/reset-password/${resetToken}`; // create the reset url
+    const resetURL = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`; // create the reset url
     await new Email(user, resetURL).sendPasswordReset();
 
     res.status(200).json({

@@ -19,7 +19,7 @@ import { toast } from "react-toastify";
 let isInitial = true;
 const HomePage = () => {
   // state change
-
+  // console.log(import.meta.env.VITE_NATOURS_API_BACKEND_URL);
   const navigate = useNavigate();
   const onSuccess = (data) => {
     console.log("successssss");

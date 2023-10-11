@@ -7,8 +7,8 @@ const morgan = require('morgan');
 const express = require('express');
 const helmet = require('helmet');
 const ErrorHandling = require('./util/ErrorHandling');
-const ErrorHandlingFunc = require('./controllers/errorControllers');
 const cors = require('cors');
+const ErrorHandlingFunc = require('./controllers/errorControllers');
 
 // const corsOptions = {
 //   origin: '*',
