@@ -16,7 +16,9 @@ const TourCard = ({ tour }) => {
         <div className="relative w-full h-[22rem] before:absolute before:content-[''] before:top-0 before:left-0 before:w-full before:h-full  z-10  before:linearGrad before:opacity-70 clip-path ">
           <img
             crossOrigin="anonymous"
-            src={`http://localhost:3000/img/tours/${tour?.imageCover}`}
+            src={`${import.meta.env.VITE_NATOURS_API_BACKEND_URL}/img/tours/${
+              tour?.imageCover
+            }`}
             alt="tour"
             className="w-full h-full object-cover "
           />

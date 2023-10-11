@@ -21,7 +21,7 @@ const useAxios = () => {
       Applydata(result);
       setResponse(result);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       setError(err.response.data.message || "Something went wrong!");
     } finally {
       setIsLoading(false);

@@ -12,8 +12,8 @@ import ForgetPass from "../Validations/ForgetPass";
 const ForgetPassword = () => {
   const [sendAgain, setSendAgain] = React.useState(false);
   const onSuccess = (data) => {
-    console.log("successssss");
-    console.log(data);
+    // console.log("successssss");
+    // console.log(data);
     // const token = data?.data?.token;
     // const user = data?.data?.data?.user;
     // localStorage.setItem("token", token);
@@ -33,7 +33,7 @@ const ForgetPassword = () => {
     useForgetPasswordUser(onSuccess, onError);
   const dispatch = useDispatch();
   const submitHandler = (values, formik) => {
-    console.log(values);
+    // console.log(values);
     mutate(values);
   };
   return (

@@ -6,7 +6,7 @@ exports.deleteOne = Model =>
   catchAsync(async (req, res, next) => {
     const { id } = req.params;
     const doc = await Model.findByIdAndDelete(id); // delete a document from the collection 'document' by id
-    console.log(doc);
+    // console.log(doc);
     if (!doc) {
       return next(new AppError('No document found with that ID', 404));
     }
@@ -62,7 +62,7 @@ exports.getOne = (Model, popOptions) =>
 exports.getAll = Model =>
   catchAsync(async (req, res, next) => {
     // print original url
-    console.log({ a: req.originalUrl });
+    // console.log({ a: req.originalUrl });
     // console.log(req.ori);
     //  to allow for nested GET reviews on tour (hack)
     // /api/v1/tours/:tourId/reviews

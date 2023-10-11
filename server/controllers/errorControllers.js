@@ -5,11 +5,11 @@ const handleInvalidIdErrorDB = err => {
   return new AppError(message, 400); // 400 is for bad request
 };
 const handleDuplicateKeyErrorDB = err => {
-  console.log('wwwwwwwwwwwwwwwwwwwwwwww');
+  // console.log('wwwwwwwwwwwwwwwwwwwwwwww');
 
   // alway the value is in err.keyValue and itis the first value in the object
   const values = Object.values(err.keyValue); // err.keyValue is an object that has the duplicate value
-  console.log(values);
+  // console.log(values);
   const value = values[0];
   // check if the value is an email
   if (validator.isEmail(value)) {
@@ -62,7 +62,7 @@ const sendErrorProd = (err, res) => {
 };
 module.exports = (err, req, res, next) => {
   // Error Handling Middleware function
-  console.log('kkkkkkkkkkkkkkkk');
+  // console.log('kkkkkkkkkkkkkkkk');
   console.log(err);
   err.statusCode = err.statusCode || 500;
   err.status = err.status || 'error';
@@ -77,7 +77,7 @@ module.exports = (err, req, res, next) => {
     }
     console.log('error.code', error.code);
     if (error.code === 11000) {
-      console.log('kkkkkkkkkkkkkkkk');
+      // console.log('kkkkkkkkkkkkkkkk');
 
       error = handleDuplicateKeyErrorDB(error);
     }

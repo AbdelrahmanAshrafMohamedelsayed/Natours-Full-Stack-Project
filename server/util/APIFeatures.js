@@ -4,7 +4,7 @@ class APIFeatures {
     this.queryString = queryString;
   }
   filter() {
-    console.log('filterrrrrrrrrrrrrrrr');
+    // console.log('filterrrrrrrrrrrrrrrr');
     const queryObj = { ...this.queryString };
     const excluded_fields = ['page', 'sort', 'limit', 'fields'];
     excluded_fields.forEach(el => delete queryObj[el]);
@@ -23,7 +23,7 @@ class APIFeatures {
     // 2) SORTING
     if (this.queryString.sort) {
       const sortBy = this.queryString.sort.split(',').join(' '); // sort('price ratingsAverage')
-      console.log(sortBy);
+      // console.log(sortBy);
       this.query = this.query.sort(sortBy);
     } else {
       this.query = this.query.sort('-createdAt');

@@ -13,7 +13,7 @@ const PasswordChangeForm = () => {
     // console.log("successssss");
     const token = data?.data?.token;
     const user = data?.data?.data?.user;
-    console.log({ user, token });
+    // console.log({ user, token });
     localStorage.setItem("token", token);
     localStorage.setItem("user", JSON.stringify(user));
     dispatch(userActions.setToken(token));
@@ -21,7 +21,7 @@ const PasswordChangeForm = () => {
     toast.success("Password Updated Successfully");
   };
   const onError = (data) => {
-    console.log("errdddddddddddddddddddddrrr");
+    // console.log("errdddddddddddddddddddddrrr");
 
     toast.error(data.response.data.message || "Something went wrong!");
   };
@@ -29,8 +29,8 @@ const PasswordChangeForm = () => {
     useProfilePasswordUpdate(onSuccess, onError);
   const submitHandler = (values, formik) => {
     // reset form
-    console.log("formik");
-    console.log(values);
+    // console.log("formik");
+    // console.log(values);
     const { Currentpassword, password, confirmPassword } = values;
     const data = {
       currentPassword: Currentpassword,

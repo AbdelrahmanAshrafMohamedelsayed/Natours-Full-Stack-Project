@@ -5,11 +5,11 @@ import { Rev } from "../components";
 
 const MyReviews = () => {
   const onSuccess = (data) => {
-    console.log("successssss");
-    console.log(data);
+    // console.log("successssss");
+    // console.log(data);
   };
   const onError = (data) => {
-    console.log("errdddddddddddddddddddddrrr");
+    // console.log("errdddddddddddddddddddddrrr");
     toast.error(data.response.data.message || "Something went wrong!");
   };
   const { isLoading, isError, error, data } = useFetchReviewsuser(

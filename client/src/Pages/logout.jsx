@@ -7,6 +7,6 @@ export const LogoutAction = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
   dispatch(userActions.Removedata());
-  console.log("hhhhhhhhhhhhhhhhhhhhh");
+  // console.log("hhhhhhhhhhhhhhhhhhhhh");
   return redirect("/");
 };

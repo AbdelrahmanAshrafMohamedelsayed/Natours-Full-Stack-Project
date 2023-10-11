@@ -18,10 +18,10 @@ import ResetPass from "../Validations/ResetPass";
 const ResetPassword = () => {
   const navigate = useNavigate();
   const { token } = useParams();
-  console.log(token);
+  // console.log(token);
   const onSuccess = (data) => {
-    console.log("successssss");
-    console.log(data);
+    // console.log("successssss");
+    // console.log(data);
     const token = data?.data?.token;
     const user = data?.data?.data?.user;
     localStorage.setItem("token", token);
@@ -32,7 +32,7 @@ const ResetPassword = () => {
     navigate("/");
   };
   const onError = (data) => {
-    console.log("errdddddddddddddddddddddrrr");
+    // console.log("errdddddddddddddddddddddrrr");
     toast.error(data.response.data.message || "Something went wrong!");
   };
   const { mutate, isLoading, isError, error, isSuccess } = useResetPasswordUser(
@@ -41,7 +41,7 @@ const ResetPassword = () => {
   );
   const dispatch = useDispatch();
   const submitHandler = (values, formik) => {
-    console.log(values);
+    // console.log(values);
     const data = {
       token,
       data: values,

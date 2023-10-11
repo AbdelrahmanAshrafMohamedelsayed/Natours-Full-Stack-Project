@@ -12,7 +12,7 @@ export function logoutHandler(e, submit) {
   submit(null, { action: "/logout", method: "post" });
 }
 export const getToken = () => {
-  console.log("getToken");
+  // console.log("getToken");
   const token = localStorage.getItem("token");
   const user = localStorage.getItem("user");
 

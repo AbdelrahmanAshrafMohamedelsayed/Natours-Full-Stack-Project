@@ -47,7 +47,9 @@ const Tour = () => {
               //     .href
               // }
               crossOrigin="anonymous"
-              src={`http://localhost:3000/img/tours/${tour?.imageCover}`}
+              src={`${import.meta.env.VITE_NATOURS_API_BACKEND_URL}/img/tours/${
+                tour?.imageCover
+              }`}
               alt={tour?.name}
               className="w-full h-full object-cover"
             />

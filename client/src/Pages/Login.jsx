@@ -10,8 +10,8 @@ import { ToastContainer, toast } from "react-toastify";
 import { useLoginUser } from "../hooks/useUserData";
 const Login = () => {
   const onSuccess = (data) => {
-    console.log("successssss");
-    console.log(data);
+    // console.log("successssss");
+    // console.log(data);
     const token = data?.data?.token;
     const user = data?.data?.data?.user;
     localStorage.setItem("token", token);

@@ -11,7 +11,9 @@ const rev = ({ item, my }) => {
         {item?.user?.photo && (
           <img
             crossOrigin="anonymous"
-            src={`http://localhost:3000/img/users/${item?.user?.photo}`}
+            src={`${import.meta.env.VITE_NATOURS_API_BACKEND_URL}/img/users/${
+              item?.user?.photo
+            }`}
             alt="user"
             className="w-[4.5rem] h-[4.5rem] rounded-full mr-[1.5rem]"
           />

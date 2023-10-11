@@ -40,10 +40,10 @@ export const useOneTourFetch = (tourId) => {
         ?.find((tour) => tour._id === tourId);
 
       if (tour) {
-        console.log("Tour found:", tour);
+        // console.log("Tour found:", tour);
         return tour;
       } else {
-        console.log("Tour not found");
+        // console.log("Tour not found");
         return undefined;
       }
     },

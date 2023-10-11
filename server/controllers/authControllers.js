@@ -85,11 +85,11 @@ exports.login = catchAsync(async (req, res, next) => {
   //   return next(new ErrorHandling('Incorrect email or password', 401)); // 401 means unauthorized
   // }
   if (!user || !(await user.correctPassword(password, user.password))) {
-    console.log(password, user?.password);
-    console.log('🔥🔥🔥🔥🔥🔥🔥🔥🔥');
+    // console.log(password, user?.password);
+    // console.log('🔥🔥🔥🔥🔥🔥🔥🔥🔥');
     return next(new ErrorHandling('Incorrect email or password', 401)); // 401 means unauthorized
   }
-  console.log('🔥🔥🔥🔥🔥🔥🔥🔥🔥');
+  // console.log('🔥🔥🔥🔥🔥🔥🔥🔥🔥');
   // console.log(user);
   // const token = signToken(user._id);
 
@@ -100,7 +100,7 @@ exports.login = catchAsync(async (req, res, next) => {
   createSendToken(user, 200, res);
 });
 exports.protect = catchAsync(async (req, res, next) => {
-  console.log('req.headers', req.body);
+  // console.log('req.headers', req.body);
   // 1) Getting token and check if it's there
   let token;
   // console.log('req.headers', req.headers);
@@ -147,7 +147,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
   // GRANT ACCESS TO PROTECTED ROUTE
   req.user = currentUser; // we can use this user in the next middleware
-  console.log('req.user 💥 💥 💥 💥 💥 💥 💥', req.user);
+  // console.log('req.user 💥 💥 💥 💥 💥 💥 💥', req.user);
   next();
 });
 exports.restrictTo = (...roles) => {
@@ -211,7 +211,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 });
 // 2. resetPassword
 exports.resetPassword = catchAsync(async (req, res, next) => {
-  console.log('resssssssssssssssssser');
+  // console.log('resssssssssssssssssser');
   // 1) Get user based on the token
   const { token } = req.params; // get the token from the request parameters
   const hashedToken = crypto
@@ -247,19 +247,19 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 });
 exports.updatePassword = catchAsync(async (req, res, next) => {
   // 1) Get user from collection
-  console.log(req.body);
+  // console.log(req.body);
   const { _id: id } = req.user; // destructuring
   const user = await User.findById(id).select('+password');
   // if(!user){
   // } // no need he should have been loged in already
-  console.log(user + 'upppppppppppppp');
+  // console.log(user + 'upppppppppppppp');
   //2) check if the current password is correct
   const {
     currentPassword,
     password: newPassword,
     passwordConfirm: passwordNewConfirm
   } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
   // if (currentPassword !== user.password) {
   //   return next(new ErrorHandling('Your current password is wrong.', 401));
   // }
@@ -281,3 +281,10 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   // });
   createSendToken(user, 200, res);
 });
+exports.logout = (req, res) => {
+  res.cookie('jwt', 'loggedout', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true
+  });
+  res.status(200).json({ status: 'success' });
+};

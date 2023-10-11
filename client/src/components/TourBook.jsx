@@ -16,8 +16,8 @@ const stripePromise = loadStripe(
 );
 const TourBook = ({ tourId }) => {
   const onSuccess = async (session) => {
-    console.log("successssss");
-    console.log(session);
+    // console.log("successssss");
+    // console.log(session);
     const stripe = await stripePromise;
     const { error } = await stripe.redirectToCheckout({
       sessionId: session.id,
@@ -37,13 +37,13 @@ const TourBook = ({ tourId }) => {
   // const dispatch = useDispatch();
   const { token } = useSelector((state) => state.user);
   const user = useSelector((state) => state.user)?.user;
-  console.log(user);
+  // console.log(user);
   const onSuccess2 = (data) => {
-    console.log("successssss");
-    console.log(data);
+    // console.log("successssss");
+    // console.log(data);
   };
   const onError2 = (data) => {
-    console.log("errdddddddddddddddddddddrrr");
+    // console.log("errdddddddddddddddddddddrrr");
     toast.error(data.response.data.message || "Something went wrong!");
   };
   const {
@@ -54,7 +54,7 @@ const TourBook = ({ tourId }) => {
   } = useFetchBookingTours(onSuccess2, onError2);
   const isBooked = userBookedTours?.some((item) => item.id === tourId);
   // userBookedTours?.map((item) => console.log(item.id === tourId));
-  console.log({ isBooked });
+  // console.log({ isBooked });
   return (
     <div className="bg-[#F7F7F7] mt-[-9vw]  pt-[calc(15rem+9vw)] pb-[11rem] flex justify-center overflow-hidden ">
       <div className="max-w-[105rem] bg-white rounded-[2rem] py-[9rem] pr-[3rem] pl-[21rem] max-md:pl-[3rem] shadow-xl overflow-hidden relative max-md:max-w-[90%] ">

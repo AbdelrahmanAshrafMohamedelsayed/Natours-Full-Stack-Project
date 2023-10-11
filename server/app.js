@@ -7,6 +7,7 @@ const morgan = require('morgan');
 const express = require('express');
 const helmet = require('helmet');
 const ErrorHandling = require('./util/ErrorHandling');
+const compression = require('compression');
 const cors = require('cors');
 const ErrorHandlingFunc = require('./controllers/errorControllers');
 
@@ -23,22 +24,24 @@ const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 
 app.use(cors());
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-  );
-  res.setHeader(
-    'Access-Control-Allow-Methods',
-    'GET, POST, PATCH, DELETE, OPTIONS'
-  );
-  next();
-});
+// walid
+// app.use((req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   res.setHeader(
+//     'Access-Control-Allow-Headers',
+//     'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+//   );
+//   res.setHeader(
+//     'Access-Control-Allow-Methods',
+//     'GET, POST, PATCH, DELETE, OPTIONS'
+//   );
+//   next();
+// });
 // 1) GLOBAL MIDDLEWARES
 
 // Set security HTTP headers
 // 1) should be the first middleware to include the security headers
+app.options('*', cors());
 app.use(helmet());
 
 // Development logging
@@ -105,6 +108,8 @@ app.use(express.static(`${__dirname}/public`));
 //   console.log('Hello from the middleware 👋');
 //   next();
 // });
+app.use(compression()); // compress all the text that is sent to the client (html, css, js, json, etc...) not images
+
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
   next();

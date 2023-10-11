@@ -22,8 +22,8 @@ const HomePage = () => {
   // console.log(import.meta.env.VITE_NATOURS_API_BACKEND_URL);
   const navigate = useNavigate();
   const onSuccess = (data) => {
-    console.log("successssss");
-    console.log(data);
+    // console.log("successssss");
+    // console.log(data);
     navigate("/");
   };
   const onError = (data) => {
@@ -33,7 +33,7 @@ const HomePage = () => {
   const { mutate } = useBookTour(onSuccess, onError);
   // get the query params from the URL
   const [queryParameters] = useSearchParams();
-  console.log(queryParameters);
+  // console.log(queryParameters);
   const dataa = {
     tour: queryParameters.get("tour"),
     user: queryParameters.get("user"),
@@ -43,13 +43,13 @@ const HomePage = () => {
   // console.log(dataa);
   useEffect(() => {
     if (isInitial && tour && user && price) {
-      console.log(
-        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-      );
+      // console.log(
+      //   "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      // );
       isInitial = false;
       mutate(dataa);
     } else {
-      console.log("bbbbbbbbbb");
+      // console.log("bbbbbbbbbb");
     }
   }, [tour, user, price]);
   // const onSuccess = (data) => {
@@ -78,10 +78,10 @@ const HomePage = () => {
       // clientHeight is the height of the viewport.
       if (!fetching && scrollHeight - scrollTop <= clientHeight * 1.5) {
         fetching = true;
-        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        console.log("hasNextPage", hasNextPage);
+        // console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        // console.log("hasNextPage", hasNextPage);
         if (hasNextPage) {
-          console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+          // console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
 
           await fetchNextPage();
         }

@@ -2,7 +2,6 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { request } from "../Axios/axios";
 
 const Login = (user) => {
-  // return axios.post('http://localhost:4000/superheroes', hero)
   return request({
     url: "/users/login",
     method: "post",
@@ -12,7 +11,21 @@ const Login = (user) => {
     },
   });
 };
-
+const Logout = () => {
+  return request({
+    url: "/users/logout",
+    method: "post",
+    headers: {
+      accept: "application/json",
+    },
+  });
+};
+export const useLogOutUser = (onSuccess, onError) => {
+  return useMutation(Logout, {
+    onSuccess,
+    onError,
+  });
+};
 export const useLoginUser = (onSuccess, onError) => {
   return useMutation(Login, {
     onSuccess,
@@ -58,7 +71,6 @@ export const useForgetPasswordUser = (onSuccess, onError) => {
   });
 };
 const SignUp = (user) => {
-  // return axios.post('http://localhost:4000/superheroes', hero)
   return request({
     url: "/users/signup",
     method: "post",
@@ -76,7 +88,6 @@ export const useSignUpUser = (onSuccess, onError) => {
 };
 
 const UpdateUserInfo = (user) => {
-  // return axios.post('http://localhost:4000/superheroes', hero)
   return request({
     url: "/users/updateMe",
     method: "PATCH",
@@ -93,7 +104,6 @@ export const useProfileUpdate = (onSuccess, onError) => {
   });
 };
 const UpdateUserPassword = (user) => {
-  // return axios.post('http://localhost:4000/superheroes', hero)
   return request({
     url: "/users/updateMyPassword",
     method: "PATCH",
@@ -109,7 +119,6 @@ export const useProfilePasswordUpdate = (onSuccess, onError) => {
 const AddReview = (user) => {
   const tourId = user?.tourId;
   const review = user?.review;
-  // return axios.post('http://localhost:4000/superheroes', hero)
   return request({
     url: `/tours/${tourId}/reviews`,
     method: "POST",
@@ -140,7 +149,6 @@ export const useAddreview = (tourId, onSuccess, onError) => {
 const EditReview = (user) => {
   const reviewId = user?.id;
   const review = user?.review;
-  // return axios.post('http://localhost:4000/superheroes', hero)
   return request({
     url: `/reviews/${reviewId}`,
     method: "PATCH",

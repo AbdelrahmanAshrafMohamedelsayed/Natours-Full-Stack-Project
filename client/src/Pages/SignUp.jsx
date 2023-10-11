@@ -13,7 +13,7 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onSuccess = (data) => {
-    console.log("successssss");
+    // console.log("successssss");
     const token = data?.data?.token;
     const user = data?.data?.data?.user;
     localStorage.setItem("token", token);
@@ -22,7 +22,7 @@ const SignUp = () => {
     dispatch(userActions.setToken(token));
     toast.success("SignUp Successfully");
     navigate("/");
-    console.log(data);
+    // console.log(data);
   };
   const onError = (data) => {
     // console.log("errdddddddddddddddddddddrrr");

@@ -5,22 +5,35 @@ import { FaBars } from "react-icons/fa";
 import userlogo from "../assets/users/user-1.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../Store/user";
+import { toast } from "react-toastify";
+import { useLogOutUser } from "../hooks/useUserData";
 const NavBar = () => {
   const navigate = useNavigate();
   const submit = useSubmit();
   const dispatch = useDispatch();
-  const logoutHandler = (e) => {
-    e.preventDefault();
-    // await signOut(auth);
-    // console.log("logout1");
-    // submit(null, { action: "/logout", method: "post" });
+  const onSuccess = (data) => {
+    console.log("successssss");
+    console.log(data);
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     dispatch(userActions.Removedata());
-
+    toast.success("Logout Successfully");
     // console.log("hhhhhhhhhhhhhhhhhhhhh");
     // console.log("logout");
     navigate("/");
+  };
+  const onError = (data) => {
+    // console.log("errdddddddddddddddddddddrrr");
+    toast.error(data.response.data.message || "Something went wrong!");
+  };
+  const { mutate, isLoading, isError, error, isSuccess } = useLogOutUser(
+    onSuccess,
+    onError
+  );
+
+  const logoutHandler = (e) => {
+    e.preventDefault();
+    mutate();
   };
   const [Showlist, setShowlist] = useState(false);
   const user = useSelector((state) => state.user)?.user;
@@ -94,7 +107,9 @@ const NavBar = () => {
               {photo && (
                 <img
                   crossOrigin="anonymous"
-                  src={`http://localhost:3000/img/users/${photo}`}
+                  src={`${
+                    import.meta.env.VITE_NATOURS_API_BACKEND_URL
+                  }/img/users/${photo}`}
                   alt="logo"
                   className=" rounded-full w-[3.9rem] h-[3.9rem] object-cover mr-[1rem]"
                 />

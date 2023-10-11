@@ -12,7 +12,7 @@ const AccountUpdateForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onSuccess = (data) => {
-    console.log("successssss");
+    // console.log("successssss");
     // const token = data?.data?.token;
     const user = data?.data?.data?.user;
     // localStorage.setItem("token", token);
@@ -117,7 +117,9 @@ const AccountUpdateForm = () => {
                   {userData?.photo && !previewImage && (
                     <img
                       crossOrigin="anonymous"
-                      src={`http://localhost:3000/img/users/${userData?.photo}`}
+                      src={`${
+                        import.meta.env.VITE_NATOURS_API_BACKEND_URL
+                      }/img/users/${userData?.photo}`}
                       alt="user"
                       className="w-full h-full object-cover rounded-[50%]"
                     />
