@@ -26,8 +26,8 @@
   - [🔑 PASSWORD CHANGE](#-password-change)
 - [🏁Getting Started](#getting-started)
 - [⬇️Installation](#️installation)
+- [� Contributors ](#-contributors-)
 - [📄License](#license)
-- [🕴 Contributors ](#-contributors-)
 
 ## 👋Introduction
 
@@ -243,10 +243,6 @@ To set up the Natours Full Stack project locally, follow the instructions below.
 
 10. Open your browser and navigate to [http://localhost:5173/](http://localhost:5173/) to access Natours application.
 
-## 📄License
-
-The Natours project is open-source and is licensed under the [MIT License](https://github.com/AbdelrahmanAshrafMohamedelsayed/Natours-Full-Stack-Project/blob/main/LICENSE) .
-
 ## 🕴 Contributors <a name = "Contributors"></a>
 
 <table>
@@ -255,3 +251,7 @@ The Natours project is open-source and is licensed under the [MIT License](https
 
   </tr>
  </table>
+ 
+## 📄License
+
+The Natours project is open-source and is licensed under the [MIT License](https://github.com/AbdelrahmanAshrafMohamedelsayed/Natours-Full-Stack-Project/blob/main/LICENSE) .
